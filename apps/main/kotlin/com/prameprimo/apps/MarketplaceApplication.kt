@@ -1,4 +1,4 @@
-package com.prameprimo.marketplace
+package com.prameprimo.apps
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

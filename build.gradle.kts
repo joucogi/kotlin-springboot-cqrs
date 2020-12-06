@@ -22,6 +22,16 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+sourceSets.main {
+	java.srcDirs("apps/main/kotlin")
+	resources.srcDirs("apps/main/resources")
+}
+
+sourceSets.test {
+	java.srcDirs("apps/test/kotlin")
+	resources.srcDirs("apps/test/resources")
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
