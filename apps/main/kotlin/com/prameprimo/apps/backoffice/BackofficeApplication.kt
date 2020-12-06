@@ -1,6 +1,6 @@
-package com.prameprimo.apps.shop
+package com.prameprimo.apps.backoffice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class ShopApplication
+class BackofficeApplication
