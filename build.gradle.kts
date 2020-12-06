@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	id("org.springframework.boot") version "2.4.0"
@@ -7,23 +8,85 @@ plugins {
 	kotlin("plugin.spring") version "1.4.10"
 }
 
-group = "com.prameprimo"
-version = "0.0.1"
-java.sourceCompatibility = JavaVersion.VERSION_11
+allprojects {
 
-repositories {
-	mavenCentral()
+	apply(plugin = "java")
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "org.springframework.boot")
+
+	group = "com.prameprimo"
+	version = "0.0.1"
+	java.sourceCompatibility = JavaVersion.VERSION_11
+	java.targetCompatibility = JavaVersion.VERSION_11
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter")
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+		implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
+
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+	}
+
+	tasks.withType<KotlinCompile> {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "11"
+		}
+	}
+
+	tasks.withType<Test> {
+		useJUnitPlatform()
+	}
 }
 
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+// All subprojects
+subprojects {
+	group = "com.prameprimo.${rootProject.name}"
 
-	implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
+	sourceSets.main {
+		java.srcDirs("main/kotlin")
+		resources.srcDirs("main/resources")
+	}
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	sourceSets.test {
+		java.srcDirs("test/kotlin")
+		resources.srcDirs("test/resources")
+	}
+
+	// dependencies {
+
+	//testImplementation(rootProject.sourceSets.main.output)
+
+
+	//  if (project.name != "shared") {
+	//      implementation(project(":shared"))
+	//      testImplementation(project(":shared").sourceSets.test.output)
+	//  }
+	// }
+
+	tasks.getByName<BootJar>("bootJar") {
+		enabled = false
+	}
+
+	//tasks.getByName<Jar>("Jar") {
+    //		enabled = true
+	//}
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.0")
+	}
 }
 
 sourceSets.main {
@@ -36,13 +99,10 @@ sourceSets.test {
 	resources.srcDirs("apps/test/resources")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
-	}
-}
+dependencies {
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+	implementation(project(":shared"))
+	implementation(project(":backoffice"))
+	implementation(project(":shop"))
+
 }
