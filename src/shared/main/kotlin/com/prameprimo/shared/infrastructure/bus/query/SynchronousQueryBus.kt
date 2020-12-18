@@ -1,10 +1,10 @@
 package com.prameprimo.shared.infrastructure.bus.query
 
+import com.prameprimo.shared.domain.Service
 import com.prameprimo.shared.domain.bus.query.Query
 import com.prameprimo.shared.domain.bus.query.QueryBus
 import com.prameprimo.shared.domain.bus.query.QueryHandler
 import org.springframework.context.ApplicationContext
-import org.springframework.stereotype.Service
 
 @Service
 class SynchronousQueryBus(

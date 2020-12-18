@@ -1,6 +1,6 @@
 package com.prameprimo.shop.application.search_all
 
-import org.springframework.stereotype.Service
+import com.prameprimo.shared.domain.Service
 
 @Service
 class AllProductsSearcher {
