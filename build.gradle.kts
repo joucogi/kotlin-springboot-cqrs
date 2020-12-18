@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
+	id("java")
 	id("org.springframework.boot") version "2.4.0"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	kotlin("jvm") version "1.4.10"
@@ -10,11 +11,13 @@ plugins {
 
 allprojects {
 
-	apply(plugin = "java")
-	apply(plugin = "io.spring.dependency-management")
-	apply(plugin = "org.springframework.boot")
+	apply {
+		plugin("java")
+		plugin("org.jetbrains.kotlin.jvm")
+		plugin("io.spring.dependency-management")
+		plugin("org.springframework.boot")
+	}
 
-	group = "com.prameprimo"
 	version = "0.0.1"
 	java.sourceCompatibility = JavaVersion.VERSION_11
 	java.targetCompatibility = JavaVersion.VERSION_11
@@ -24,25 +27,13 @@ allprojects {
 	}
 
 	dependencies {
+
 		implementation("org.springframework.boot:spring-boot-starter")
-		implementation("org.springframework.boot:spring-boot-starter-web")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		implementation("org.reflections:reflections:0.9.11")
 
 		implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
-
-		testImplementation("org.springframework.boot:spring-boot-starter-test")
-	}
-
-	tasks.withType<KotlinCompile> {
-		kotlinOptions {
-			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "11"
-		}
-	}
-
-	tasks.withType<Test> {
-		useJUnitPlatform()
 	}
 }
 
@@ -60,24 +51,25 @@ subprojects {
 		resources.srcDirs("test/resources")
 	}
 
-	// dependencies {
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		//testImplementation(rootProject.sourceSets.main.output)
 
-	//testImplementation(rootProject.sourceSets.main.output)
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		if (project.name != "shared") {
+			implementation(project(":shared"))
+			//testImplementation(project(":shared").sourceSets.test.output)
+		}
+	}
 
-
-	//  if (project.name != "shared") {
-	//      implementation(project(":shared"))
-	//      testImplementation(project(":shared").sourceSets.test.output)
-	//  }
-	// }
-
-	tasks.getByName<BootJar>("bootJar") {
+	tasks.withType<BootJar> {
 		enabled = false
 	}
 
-	//tasks.getByName<Jar>("Jar") {
-    //		enabled = true
-	//}
+	tasks.withType<Jar> {
+		enabled = true
+	}
+
 }
 
 buildscript {
@@ -99,10 +91,23 @@ sourceSets.test {
 	resources.srcDirs("apps/test/resources")
 }
 
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs = listOf("-Xjsr305=strict")
+		jvmTarget = "11"
+	}
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-web")
 
 	implementation(project(":shared"))
 	implementation(project(":backoffice"))
 	implementation(project(":shop"))
 
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
