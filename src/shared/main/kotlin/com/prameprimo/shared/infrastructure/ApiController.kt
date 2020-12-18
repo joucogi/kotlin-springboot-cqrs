@@ -8,5 +8,5 @@ abstract class ApiController {
     @Autowired
     val queryBus: QueryBus? = null
 
-    fun ask(query: Query) = queryBus!!.ask(query)
+    protected fun ask(query: Query<Any?>): HashMap<String, String> = queryBus!!.ask(query)
 }
