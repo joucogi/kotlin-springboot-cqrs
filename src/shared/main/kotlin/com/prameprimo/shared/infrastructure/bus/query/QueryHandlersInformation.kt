@@ -12,7 +12,7 @@ class QueryHandlersInformation {
 
     private val indexedQueryHandlers: HashMap<Type, Class<out QueryHandler<*>>> = hashMapOf()
 
-    fun search(query: Query): Class<out QueryHandler<*>>? {
+    fun search(query: Query<Any?>): Class<out QueryHandler<*>>? {
         if (indexedQueryHandlers.isEmpty()) {
             println("Search query handlers")
             indexingQueryHandlers()
@@ -22,7 +22,7 @@ class QueryHandlersInformation {
     }
 
     private fun indexingQueryHandlers() {
-        val reflections = Reflections("com.prameprimo.marketplace")
+        val reflections = Reflections("com.prameprimo")
         val queryHandlers = reflections.getSubTypesOf(QueryHandler::class.java)
         formatHandlers(queryHandlers)
     }
