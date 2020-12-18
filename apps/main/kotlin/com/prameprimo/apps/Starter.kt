@@ -3,7 +3,6 @@ package com.prameprimo.apps
 import com.prameprimo.apps.backoffice.BackofficeApplication
 import com.prameprimo.apps.shop.ShopApplication
 import org.springframework.boot.SpringApplication
-import org.springframework.boot.runApplication
 import kotlin.reflect.KClass
 
 fun main(args: Array<String>) {
