@@ -1,7 +1,7 @@
 package com.prameprimo.shop.application.search_all
 
+import com.prameprimo.shared.domain.Service
 import com.prameprimo.shared.domain.bus.query.QueryHandler
-import org.springframework.stereotype.Service
 
 @Service
 class AllProductsSearcherQueryHandler(

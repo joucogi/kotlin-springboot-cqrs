@@ -1,9 +1,9 @@
 package com.prameprimo.shared.infrastructure.bus.query
 
+import com.prameprimo.shared.domain.Service
 import com.prameprimo.shared.domain.bus.query.Query
 import com.prameprimo.shared.domain.bus.query.QueryHandler
 import org.reflections.Reflections
-import org.springframework.stereotype.Service
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
