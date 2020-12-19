@@ -27,8 +27,6 @@ allprojects {
 	}
 
 	dependencies {
-
-		implementation("org.springframework.boot:spring-boot-starter")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 		implementation("org.reflections:reflections:0.9.11")
@@ -54,8 +52,8 @@ subprojects {
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-web")
 
-		testImplementation(rootProject.sourceSets["main"].output)
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testImplementation(rootProject.sourceSets["main"].output)
 
 		if (project.name != "shared") {
 			implementation(project(":shared"))
