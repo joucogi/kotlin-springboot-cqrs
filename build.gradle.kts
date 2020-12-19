@@ -53,12 +53,14 @@ subprojects {
 
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-web")
-		//testImplementation(rootProject.sourceSets.main.output)
 
+		testImplementation(rootProject.sourceSets["main"].output)
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 		if (project.name != "shared") {
 			implementation(project(":shared"))
-			//testImplementation(project(":shared").sourceSets.test.output)
+
+			testImplementation(project(":shared").dependencyProject.sourceSets["test"].output)
 		}
 	}
 
