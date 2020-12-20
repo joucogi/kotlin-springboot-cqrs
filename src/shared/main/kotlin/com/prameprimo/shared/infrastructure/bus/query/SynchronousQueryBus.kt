@@ -19,6 +19,7 @@ class SynchronousQueryBus(
             throw RuntimeException("Handler is not finded")
         }
 
+        @Suppress("UNCHECKED_CAST")
         val handler: QueryHandler<Query<*>> = context.getBean(queryHandlerClass) as QueryHandler<Query<*>>
 
         return handler.handle(query)
