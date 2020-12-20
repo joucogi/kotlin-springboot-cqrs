@@ -15,7 +15,7 @@ test:
 ##### CI
 ##########
 ci-up:
-	docker-compose up -d
+	@docker-compose up -d
 
 ci-test:
-	docker exec marketplace-app ./gradlew test --warning-mode all
+	@docker exec marketplace-app ./gradlew test --warning-mode all
