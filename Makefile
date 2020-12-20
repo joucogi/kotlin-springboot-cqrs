@@ -3,3 +3,6 @@ start_shop:
 
 start_backoffice:
 	@./gradlew bootRun --args='backoffice'
+
+test:
+	@./gradlew test --warning-mode all
