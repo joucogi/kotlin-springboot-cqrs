@@ -1,4 +1,4 @@
-package com.prameprimo.shop.application.products.search_all
+package com.prameprimo.shop.products.application.search_all
 
 import com.prameprimo.apps.shop.ShopApplication
 import org.junit.jupiter.api.Assertions.*
