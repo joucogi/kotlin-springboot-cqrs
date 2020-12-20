@@ -1,7 +1,8 @@
 package com.prameprimo.apps.shop.controller.products
 
 import com.prameprimo.shared.infrastructure.ApiController
-import com.prameprimo.shop.products.application.search_all.AllProductsSearcherQuery
+import com.prameprimo.shop.products.application.ProductsResponse
+import com.prameprimo.shop.products.application.search_all.SearchAllProductsQuery
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 class ProductsGetController : ApiController() {
 
     @GetMapping("/products")
-    fun index(): ResponseEntity<HashMap<String, String>> {
-        val query = AllProductsSearcherQuery()
+    fun index(): ResponseEntity<List<String>> {
+        val query = SearchAllProductsQuery()
 
-        val response = ask(query)
+        val response: ProductsResponse = ask(query) as ProductsResponse
 
-        return ResponseEntity.ok().body(response)
+        return ResponseEntity.ok().body(response.products.map { it.name })
     }
 }

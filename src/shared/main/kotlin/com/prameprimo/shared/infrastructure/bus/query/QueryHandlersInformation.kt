@@ -3,6 +3,7 @@ package com.prameprimo.shared.infrastructure.bus.query
 import com.prameprimo.shared.domain.Service
 import com.prameprimo.shared.domain.bus.query.Query
 import com.prameprimo.shared.domain.bus.query.QueryHandler
+import com.prameprimo.shared.domain.bus.query.Response
 import org.reflections.Reflections
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -10,9 +11,9 @@ import java.lang.reflect.Type
 @Service
 class QueryHandlersInformation {
 
-    private val indexedQueryHandlers: HashMap<Type, Class<out QueryHandler<*>>> = hashMapOf()
+    private val indexedQueryHandlers = hashMapOf<Type, Class<out QueryHandler<Query<*>, Response>>>()
 
-    fun search(query: Query<Any?>): Class<out QueryHandler<*>>? {
+    fun search(query: Query<Any?>): Class<out QueryHandler<Query<*>, Response>>? {
         if (indexedQueryHandlers.isEmpty()) {
             println("Search query handlers")
             indexingQueryHandlers()
@@ -24,10 +25,10 @@ class QueryHandlersInformation {
     private fun indexingQueryHandlers() {
         val reflections = Reflections("com.prameprimo")
         val queryHandlers = reflections.getSubTypesOf(QueryHandler::class.java)
-        formatHandlers(queryHandlers)
+        formatHandlers(queryHandlers as MutableSet<Class<out QueryHandler<Query<*>, Response>>>)
     }
 
-    private fun formatHandlers(queryHandlers: MutableSet<Class<out QueryHandler<*>>>) {
+    private fun formatHandlers(queryHandlers: MutableSet<Class<out QueryHandler<Query<*>, Response>>>) {
         queryHandlers.forEach {
             handler ->
                 val paramType = handler.genericInterfaces[0] as ParameterizedType

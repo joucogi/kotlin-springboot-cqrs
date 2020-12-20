@@ -1,5 +1,5 @@
 package com.prameprimo.shared.domain.bus.query
 
-interface QueryHandler<in T>{
-    fun handle(query: T): HashMap<String, String>
+interface QueryHandler<in T, out K>{
+    fun handle(query: T): K
 }
