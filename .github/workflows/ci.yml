@@ -12,5 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Start all the environment
+        run: make ci-up
+
       - name: Run the tests
-        run: make test
+        run: make ci-test
