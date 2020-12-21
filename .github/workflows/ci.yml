@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Start all the environment
-        run: make ci-up
+        run: make up
 
       - name: Run the tests
         run: make ci-test

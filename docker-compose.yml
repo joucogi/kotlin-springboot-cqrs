@@ -2,6 +2,21 @@ version: '3'
 
 services:
 
+  mysql:
+    container_name: marketplace-mysql
+    image: mysql:8
+    ports:
+      - "3360:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS shop;' > /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+
   app:
     container_name: marketplace-app
     build:
@@ -13,3 +28,5 @@ services:
     volumes:
       - .:/app:delegated
     tty: true
+    depends_on:
+      - mysql

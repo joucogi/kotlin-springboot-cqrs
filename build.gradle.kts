@@ -33,6 +33,10 @@ allprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.reflections:reflections:0.9.11")
 
+        implementation("org.hibernate:hibernate-core:5.4.9.Final")
+        implementation("org.springframework:spring-orm:5.3.2")
+        implementation("org.apache.tomcat:tomcat-dbcp:10.0.0")
+
         implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
 
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")

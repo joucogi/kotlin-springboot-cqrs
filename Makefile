@@ -2,6 +2,9 @@
 build:
 	@./gradlew build  --warning-mode all
 
+up:
+	@docker-compose up -d
+
 start_shop:
 	@./gradlew bootRun --args='shop'  --warning-mode all
 
@@ -14,8 +17,5 @@ test:
 ###########
 ##### CI
 ##########
-ci-up:
-	@docker-compose up -d
-
 ci-test:
 	@docker exec marketplace-app ./gradlew test --warning-mode all
