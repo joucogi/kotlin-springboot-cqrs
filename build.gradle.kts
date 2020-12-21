@@ -36,6 +36,7 @@ allprojects {
         implementation("org.hibernate:hibernate-core:5.4.9.Final")
         implementation("org.springframework:spring-orm:5.3.2")
         implementation("org.apache.tomcat:tomcat-dbcp:10.0.0")
+        runtimeOnly("mysql:mysql-connector-java:8.0.18")
 
         implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
 

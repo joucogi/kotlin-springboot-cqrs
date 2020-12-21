@@ -33,30 +33,29 @@ internal class SearchAllProductsQueryHandlerTests {
     @Test
     fun `should return all products`() {
         val query = SearchAllProductsQuery()
-        val products = ProductsResponse(
-                listOf(
-                        Product(
-                                ProductId("1"),
-                                ProductName("Product 1")
-                        ),
-                        Product(
-                                ProductId("2"),
-                                ProductName("Product 2")
-                        ),
-                        Product(
-                                ProductId("3"),
-                                ProductName("Product 3")
-                        ),
-                        Product(
-                                ProductId("4"),
-                                ProductName("Product 4")
-                        )
+        val products = listOf(
+                Product(
+                        ProductId("1"),
+                        ProductName("Product 1")
+                ),
+                Product(
+                        ProductId("2"),
+                        ProductName("Product 2")
+                ),
+                Product(
+                        ProductId("3"),
+                        ProductName("Product 3")
+                ),
+                Product(
+                        ProductId("4"),
+                        ProductName("Product 4")
                 )
         )
+        val expected = ProductsResponse(products)
 
         every { repository!!.searchAll() } returns products
 
-        assertEquals(products, handlerSearch!!.handle(query))
+        assertEquals(expected, handlerSearch!!.handle(query))
     }
 }
 
