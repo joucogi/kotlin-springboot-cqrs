@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.prameprimo.shop.products.domain.Product" table="products">
+        <composite-id name="id" class="com.prameprimo.shop.products.domain.ProductId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="name" class="com.prameprimo.shop.products.domain.ProductName" access="field">
+            <property column="name" name="value" type="string" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>
