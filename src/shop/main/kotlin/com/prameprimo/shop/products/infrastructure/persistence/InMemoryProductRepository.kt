@@ -29,7 +29,7 @@ class InMemoryProductRepository : ProductRepository {
             )
     )
 
-    override fun searchAll(): ProductsResponse {
-        return ProductsResponse(products)
+    override fun searchAll(): List<Product> {
+        return products
     }
 }

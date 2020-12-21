@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.RestController
 class ProductsGetController : ApiController() {
 
     @GetMapping("/products")
-    fun index(): ResponseEntity<List<String>> {
+    fun index(): ResponseEntity<List<HashMap<String, String>>> {
         val query = SearchAllProductsQuery()
 
         val response: ProductsResponse = ask(query) as ProductsResponse
 
-        return ResponseEntity.ok().body(response.products.map { it.name.value })
+        return ResponseEntity.ok().body(response.products.map {
+            hashMapOf(
+                    "id" to it.id.value,
+                    "name" to it.name.value
+            )
+        })
     }
 }
