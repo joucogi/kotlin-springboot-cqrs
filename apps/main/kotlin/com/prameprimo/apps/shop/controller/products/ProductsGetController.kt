@@ -16,6 +16,6 @@ class ProductsGetController : ApiController() {
 
         val response: ProductsResponse = ask(query) as ProductsResponse
 
-        return ResponseEntity.ok().body(response.products.map { it.name })
+        return ResponseEntity.ok().body(response.products.map { it.name.value })
     }
 }
