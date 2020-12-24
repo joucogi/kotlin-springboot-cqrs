@@ -1,5 +1,5 @@
 package com.prameprimo.shop.products.domain
 
-import java.io.Serializable
+import com.prameprimo.shared.domain.Identifier
 
-data class ProductId(val value: String = ""): Serializable
+data class ProductId(override val value: String) : Identifier()
