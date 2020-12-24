@@ -2,11 +2,9 @@ package com.prameprimo.shared.domain
 
 import java.io.Serializable
 
-abstract class Identifier : Serializable {
-    abstract val value: String
-
+abstract class Identifier(val value: String) : Serializable {
     init {
-        if (value.equals("")) {
+        if (value == "") {
             throw IllegalArgumentException()
         }
     }
