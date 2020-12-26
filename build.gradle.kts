@@ -43,6 +43,7 @@ allprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
         testImplementation("io.mockk:mockk:1.10.3")
+        testImplementation("io.github.serpro69:kotlin-faker:1.5.0")
     }
 
     tasks.withType<Test> {
