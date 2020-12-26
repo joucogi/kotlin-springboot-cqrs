@@ -42,4 +42,8 @@ class InMemoryProductRepository : ProductRepository {
     override fun save(product: Product) {
         products.add(product)
     }
+
+    fun truncate() {
+        products.clear()
+    }
 }
