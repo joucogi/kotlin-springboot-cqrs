@@ -30,7 +30,6 @@ internal class SearchAllProductsQueryHandlerTests {
 
     @Test
     fun `should return all products`() {
-        println("Should return all products")
         val query = SearchAllProductsQuery()
         val products = listOf(
                 ProductMother.random(),
