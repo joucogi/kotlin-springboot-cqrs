@@ -18,7 +18,7 @@ abstract class HibernateRepository<T>(
                 return sessionFactory.currentSession.byId(aggregateClass).load(id)
         }
 
-        protected open fun persist(entity: T) {
+        protected fun persist(entity: T) {
                 sessionFactory.currentSession.saveOrUpdate(entity)
                 sessionFactory.currentSession.flush()
                 sessionFactory.currentSession.clear()

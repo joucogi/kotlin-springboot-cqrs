@@ -6,4 +6,4 @@ import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest
 @ContextConfiguration(classes = [ShopApplication::class])
-open class ShopInfrastructureTestCase
+abstract class ShopInfrastructureTestCase

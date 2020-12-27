@@ -28,7 +28,6 @@ class HibernateConfigurationFactory(private val resourceResolver: ResourcePatter
         sessionFactory.hibernateProperties = hibernateProperties()
 
         val mappingFiles: List<Resource> = searchMappingFiles(contextName)
-
         sessionFactory.setMappingLocations(*mappingFiles.toTypedArray())
 
         return sessionFactory
@@ -57,6 +56,7 @@ class HibernateConfigurationFactory(private val resourceResolver: ResourcePatter
         ))
         val mysqlSentences = Scanner(mysqlResource.inputStream, "UTF-8").useDelimiter("\\A").next()
         dataSource.setConnectionInitSqls(ArrayList(Arrays.asList(*mysqlSentences.split(";").toTypedArray())))
+
         return dataSource
     }
 
@@ -69,6 +69,7 @@ class HibernateConfigurationFactory(private val resourceResolver: ResourcePatter
                 goodPaths.add("$module/infrastructure/persistence/hibernate/$file")
             }
         }
+
         return goodPaths.stream().map { path: String -> FileSystemResource(path) }.collect(Collectors.toList())
     }
 
