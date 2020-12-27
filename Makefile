@@ -5,6 +5,12 @@ build:
 up:
 	@docker-compose up -d
 
+mysql_up:
+	@docker-compose up -d mysql
+
+down:
+	@docker-compose down
+
 start_shop:
 	@./gradlew bootRun --args='shop'  --warning-mode all
 
