@@ -1,10 +1,7 @@
 package com.prameprimo.shop.products.infrastructure.persistence
 
 import com.prameprimo.shop.products.ProductsShopInfrastructureTestCase
-import com.prameprimo.shop.products.domain.Product
-import com.prameprimo.shop.products.domain.ProductId
 import com.prameprimo.shop.products.domain.ProductMother
-import com.prameprimo.shop.products.domain.ProductName
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -18,10 +15,7 @@ internal open class inMemoryProductRepositoryTest : ProductsShopInfrastructureTe
 
     @Test
     fun `Should save product correctly`() {
-        val product = Product(
-                ProductId("1"),
-                ProductName("Product 1")
-        )
+        val product = ProductMother.random()
 
         inMemoryProductRespository.save(product)
     }
@@ -42,7 +36,7 @@ internal open class inMemoryProductRepositoryTest : ProductsShopInfrastructureTe
                 ProductMother.random()
         )
 
-        products.forEach{
+        products.forEach {
             inMemoryProductRespository.save(it)
         }
 

@@ -29,6 +29,7 @@ allprojects {
     }
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.reflections:reflections:0.9.11")
@@ -40,6 +41,7 @@ allprojects {
 
         implementation("io.github.cdimascio:dotenv-kotlin:6.2.1")
 
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
         testImplementation("io.mockk:mockk:1.10.3")
@@ -76,9 +78,6 @@ subprojects {
     }
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web")
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation(rootProject.sourceSets["main"].output)
 
         if (project.name != "shared") {
@@ -138,12 +137,10 @@ application {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
 
     implementation(project(":shared"))
 //    implementation(project(":backoffice"))
     implementation(project(":shop"))
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(project(":shared").dependencyProject.sourceSets["test"].output)
 }
