@@ -32,4 +32,8 @@ abstract class Identifier : Comparable<Identifier>, Serializable {
         other is Identifier -> value == other.value
         else -> true
     }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
