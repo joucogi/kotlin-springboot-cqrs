@@ -22,13 +22,7 @@ open class MySqlProductRepository(
 ), ProductRepository {
     override fun searchAll(): List<Product> = all()
 
-    override fun findById(id: ProductId): Product {
-        val product = byId(id)
+    override fun findById(id: ProductId): Product = byId(id) ?: throw ProductNotExist(id)
 
-        return product ?: throw ProductNotExist(id)
-    }
-
-    override fun save(product: Product) {
-        persist(product)
-    }
+    override fun save(product: Product) = persist(product)
 }

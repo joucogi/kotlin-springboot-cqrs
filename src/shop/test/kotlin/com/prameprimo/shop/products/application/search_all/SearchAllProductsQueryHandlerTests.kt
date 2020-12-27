@@ -2,9 +2,7 @@ package com.prameprimo.shop.products.application.search_all
 
 import com.prameprimo.apps.shop.ShopApplication
 import com.prameprimo.shop.products.application.ProductsResponse
-import com.prameprimo.shop.products.domain.Product
-import com.prameprimo.shop.products.domain.ProductId
-import com.prameprimo.shop.products.domain.ProductName
+import com.prameprimo.shop.products.domain.ProductMother
 import com.prameprimo.shop.products.domain.contracts.ProductRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -32,24 +30,13 @@ internal class SearchAllProductsQueryHandlerTests {
 
     @Test
     fun `should return all products`() {
+        println("Should return all products")
         val query = SearchAllProductsQuery()
         val products = listOf(
-                Product(
-                        ProductId("1"),
-                        ProductName("Product 1")
-                ),
-                Product(
-                        ProductId("2"),
-                        ProductName("Product 2")
-                ),
-                Product(
-                        ProductId("3"),
-                        ProductName("Product 3")
-                ),
-                Product(
-                        ProductId("4"),
-                        ProductName("Product 4")
-                )
+                ProductMother.random(),
+                ProductMother.random(),
+                ProductMother.random(),
+                ProductMother.random()
         )
         val expected = ProductsResponse(products)
 
