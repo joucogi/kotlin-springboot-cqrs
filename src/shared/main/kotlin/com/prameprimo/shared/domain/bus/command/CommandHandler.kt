@@ -1,5 +1,5 @@
 package com.prameprimo.shared.domain.bus.command
 
 interface CommandHandler<in T>{
-    fun handle(query: T)
+    fun handle(command: T)
 }
