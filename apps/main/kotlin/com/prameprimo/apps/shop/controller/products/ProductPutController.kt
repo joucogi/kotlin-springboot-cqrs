@@ -3,7 +3,6 @@ package com.prameprimo.apps.shop.controller.products
 import com.prameprimo.shared.infrastructure.ApiController
 import com.prameprimo.shop.products.application.create.CreateProductCommand
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
