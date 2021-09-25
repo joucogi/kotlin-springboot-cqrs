@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationContext
 
 @Service
 class SynchronousQueryBus(
-        private val information: QueryHandlersInformation,
-        private val context: ApplicationContext
+    private val information: QueryHandlersInformation,
+    private val context: ApplicationContext
 ) : QueryBus {
 
     override fun ask(query: Query<Any?>): Response {
